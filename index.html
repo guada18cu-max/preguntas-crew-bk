@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preguntas Crew BK</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f7f7f7, #eeeeee);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    width: min(760px, 100%);
+    background: white;
+    border-radius: 22px;
+    padding: 34px;
+    box-shadow: 0 12px 35px rgba(0,0,0,.12);
+    text-align: center;
+  }
+  .title {
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+  .subtitle {
+    color: #666;
+    margin: 0 0 28px;
+    font-size: 16px;
+  }
+  .counter {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .question {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    border-radius: 18px;
+    background: #f5f5f5;
+    font-size: clamp(21px, 3vw, 30px);
+    line-height: 1.3;
+    font-weight: 700;
+    margin-bottom: 25px;
+  }
+  button {
+    border: 0;
+    border-radius: 14px;
+    padding: 15px 28px;
+    font-size: 17px;
+    font-weight: 800;
+    cursor: pointer;
+    margin: 5px;
+  }
+  #next {
+    background: #111;
+    color: white;
+  }
+  #reset {
+    background: #e9e9e9;
+    color: #222;
+  }
+  button:hover { transform: translateY(-1px); }
+  .done {
+    color: #287a3d;
+    font-weight: 800;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1 class="title">🍔 Preguntas Crew BK</h1>
+  <p class="subtitle">Selector aleatorio para capacitación verbal</p>
+  <div class="counter" id="counter">Listo para comenzar</div>
+  <div class="question" id="question">Presioná “Sacar pregunta” para comenzar.</div>
+  <button id="next" onclick="nextQuestion()">🎲 Sacar pregunta</button>
+  <button id="reset" onclick="resetRound()">🔄 Nueva ronda</button>
+</div>
+
+<script>
+const questions = ["¿Cuál es la distancia mínima que deben estar los estantes del suelo en bodegas?", "¿Cuántos centímetros deben mantenerse las cajas de la pared?", "¿Qué producto tiene 0 minutos de retención?", "¿Qué tipo de pinza se usa para productos cocinados?", "¿Con qué frecuencia se deben higienizar las bandejas de PHU?", "¿Cuál es la distancia correcta del salero ACCUSALT sobre las papas?", "¿Qué representa el GPLS?", "¿Cada cuánto tiempo deben lavarse las manos?", "¿Qué representa la sigla PPP?", "¿Qué utensilio se usa para carne cruda?", "¿Qué es el salero ACCUTASTE?", "¿Cada cuánto tiempo deben realizarse las limpiezas del batidor de la máquina de batidos Taylor?", "¿Cuál es la temperatura de zona de peligro para los productos alimenticios?", "¿Cuántas cajas pueden apilarse como máximo en la bodega?", "¿Qué herramienta ayuda a los gerentes a comunicar metas y desempeño del restaurante?", "¿Cuántas vueltas de helado debe tener un cono?", "¿Qué es el método C.E.D.S.A?", "¿Qué significa C.E.D.S.A?", "¿Qué se hace primero en el lavado de manos según los procedimientos?", "¿Cuáles son los 5 pasos de atención al invitado?", "¿Qué son los alérgenos?", "¿Cuál es la temperatura mínima del agua caliente para lavado de manos?", "¿Cuál es el tiempo de retención del pan tostado?", "¿Cuál es el peso de la Whopper de Oro?", "¿Qué debe hacer un compañero cuando vuelve del baño y se dispone a retomar sus actividades?", "¿Qué producto tiene un tiempo de retención de 10 minutos?", "¿Cuántas horas antes se deben sacar los productos para que tomen temperatura ambiente?", "¿Qué acción se debe realizar una vez cocinada la carne, ubicada correctamente la tanda en la bandeja y colocada en la cavidad de la PHU?", "¿Qué desinfectante sirve para la desinfección de superficies?", "¿Qué se debe usar para medir la concentración de soluciones sanitizantes?"];
+let remaining = [...Array(questions.length).keys()];
+let asked = 0;
+
+function nextQuestion() {
+  if (remaining.length === 0) {
+    document.getElementById('counter').innerHTML =
+      '<span class="done">🎉 Ronda completada: 30 de 30</span>';
+    document.getElementById('question').textContent =
+      'Ya salieron todas las preguntas. Iniciá una nueva ronda para volver a jugar.';
+    return;
+  }
+
+  const randomPosition = Math.floor(Math.random() * remaining.length);
+  const questionIndex = remaining.splice(randomPosition, 1)[0];
+  asked++;
+
+  document.getElementById('counter').textContent =
+    `Pregunta ${asked} de ${questions.length}`;
+  document.getElementById('question').textContent = questions[questionIndex];
+}
+
+function resetRound() {
+  remaining = [...Array(questions.length).keys()];
+  asked = 0;
+  document.getElementById('counter').textContent = 'Nueva ronda';
+  document.getElementById('question').textContent =
+    'Presioná “Sacar pregunta” para comenzar.';
+}
+</script>
+</body>
+</html>
