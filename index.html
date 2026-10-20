@@ -1,122 +1,3640 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Preguntas Crew BK</title>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<title>Evaluación de Conocimientos - Burger King</title>
+
+
 <style>
-  * { box-sizing: border-box; }
-  body {
+
+/* =========================================
+   ESTILOS GENERALES
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
     margin: 0;
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #f7f7f7, #eeeeee);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .card {
-    width: min(760px, 100%);
-    background: white;
-    border-radius: 22px;
-    padding: 34px;
-    box-shadow: 0 12px 35px rgba(0,0,0,.12);
-    text-align: center;
-  }
-  .title {
-    font-size: clamp(24px, 4vw, 38px);
-    font-weight: 800;
-    margin: 0 0 8px;
-  }
-  .subtitle {
-    color: #666;
-    margin: 0 0 28px;
-    font-size: 16px;
-  }
-  .counter {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 14px;
-    font-weight: 700;
-  }
-  .question {
-    min-height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 25px;
-    border-radius: 18px;
-    background: #f5f5f5;
-    font-size: clamp(21px, 3vw, 30px);
-    line-height: 1.3;
-    font-weight: 700;
-    margin-bottom: 25px;
-  }
-  button {
-    border: 0;
-    border-radius: 14px;
-    padding: 15px 28px;
-    font-size: 17px;
-    font-weight: 800;
-    cursor: pointer;
-    margin: 5px;
-  }
-  #next {
-    background: #111;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #fff9f0;
+
+    color: #333;
+
+}
+
+
+header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #d62300,
+            #f05a28
+        );
+
     color: white;
-  }
-  #reset {
-    background: #e9e9e9;
-    color: #222;
-  }
-  button:hover { transform: translateY(-1px); }
-  .done {
-    color: #287a3d;
-    font-weight: 800;
-  }
+
+    padding: 28px 20px;
+
+    text-align: center;
+
+}
+
+
+header h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+}
+
+
+header p {
+
+    margin: 8px 0 0;
+
+    font-size: 15px;
+
+}
+
+
+.container {
+
+    max-width: 1000px;
+
+    margin: 30px auto;
+
+    padding: 0 20px;
+
+}
+
+
+.card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,0.08);
+
+    margin-bottom: 25px;
+
+}
+
+
+h2 {
+
+    margin-top: 0;
+
+    color: #a33418;
+
+}
+
+
+.section-title {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 18px;
+
+    color: #444;
+
+}
+
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+
+}
+
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+label {
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+}
+
+
+input,
+select {
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+
+input:focus,
+select:focus {
+
+    border-color: #a33418;
+
+}
+
+
+.buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+}
+
+
+button {
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 13px 22px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+button:hover {
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.btn-primary {
+
+    background: #d62300;
+
+    color: white;
+
+}
+
+
+.btn-secondary {
+
+    background: #a33418;
+
+    color: white;
+
+}
+
+
+.btn-danger {
+
+    background: #d9534f;
+
+    color: white;
+
+}
+
+
+.btn-correct {
+
+    background: #28a745;
+
+    color: white;
+
+    flex: 1;
+
+}
+
+
+.btn-incorrect {
+
+    background: #dc3545;
+
+    color: white;
+
+    flex: 1;
+
+}
+
+
+.question-number {
+
+    color: #a33418;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+
+}
+
+
+.question {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    line-height: 1.4;
+
+    margin-bottom: 25px;
+
+}
+
+
+.answer-box {
+
+    display: none;
+
+    background: #fff3e7;
+
+    border-left:
+        5px solid #a33418;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    margin: 20px 0;
+
+}
+
+
+.answer-title {
+
+    font-weight: bold;
+
+    color: #a33418;
+
+    margin-bottom: 6px;
+
+}
+
+
+.grade-buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 20px;
+
+}
+
+
+.progress-container {
+
+    height: 9px;
+
+    background: #e5e5e5;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+
+}
+
+
+.progress {
+
+    height: 100%;
+
+    background: #a33418;
+
+    width: 0%;
+
+    transition:
+        width 0.3s;
+
+}
+
+
+.result-score {
+
+    font-size: 52px;
+
+    font-weight: bold;
+
+    color: #d62300;
+
+    text-align: center;
+
+    margin: 20px 0;
+
+}
+
+
+.result-level {
+
+    text-align: center;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    margin-bottom: 25px;
+
+}
+
+
+.result-box {
+
+    background: #f8f8f8;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    margin-top: 20px;
+
+}
+
+
+.result-item {
+
+    padding: 9px 0;
+
+    font-size: 17px;
+
+}
+
+
+.recommendation {
+
+    background: #fff3e7;
+
+    border-left:
+        5px solid #a33418;
+
+    padding: 18px;
+
+    margin-top: 18px;
+
+    border-radius: 8px;
+
+    line-height: 1.5;
+
+}
+
+
+.detail-list {
+
+    margin-top: 25px;
+
+}
+
+
+.detail-item {
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+    background: #f7f7f7;
+
+}
+
+
+.detail-correct {
+
+    border-left:
+        5px solid #28a745;
+
+}
+
+
+.detail-incorrect {
+
+    border-left:
+        5px solid #dc3545;
+
+}
+
+
+.detail-question {
+
+    font-weight: bold;
+
+    margin-bottom: 7px;
+
+}
+
+
+.detail-category {
+
+    font-size: 13px;
+
+    color: #777;
+
+}
+
+
+.history-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 20px;
+
+    font-size: 14px;
+
+}
+
+
+.history-table th,
+.history-table td {
+
+    padding: 11px;
+
+    border-bottom:
+        1px solid #ddd;
+
+    text-align: left;
+
+}
+
+
+.history-table th {
+
+    background: #a33418;
+
+    color: white;
+
+}
+
+
+.history-table tr:hover {
+
+    background: #fff7ed;
+
+}
+
+
+.empty {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: #777;
+
+}
+
+
+.hidden {
+
+    display: none;
+
+}
+
+
+.loading {
+
+    text-align: center;
+
+    padding: 30px;
+
+    font-weight: bold;
+
+    color: #a33418;
+
+}
+
+
+.cancel-area {
+
+    margin-top: 20px;
+
+    text-align: center;
+
+}
+
+
+.category-badge {
+
+    display: inline-block;
+
+    background: #fff0d7;
+
+    color: #d62300;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+}
+
+
+.save-message {
+
+    text-align: center;
+
+    color: #28a745;
+
+    font-weight: bold;
+
+    margin-top: 18px;
+
+}
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin: 25px 0;
+
+}
+
+
+.dashboard-card {
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    padding: 22px 15px;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,0,0,0.08);
+
+    border-top:
+        4px solid #d62300;
+
+}
+
+
+.dashboard-icon {
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.dashboard-title {
+
+    font-size: 14px;
+
+    color: #666;
+
+    margin-bottom: 8px;
+
+}
+
+
+.dashboard-value {
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    color: #a33418;
+
+}
+
+
+.dashboard-section {
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    margin-top: 20px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,0,0,0.06);
+
+}
+
+
+.dashboard-section h3 {
+
+    margin-top: 0;
+
+    color: #d62300;
+
+    font-size: 18px;
+
+    border-bottom:
+        1px solid #eeeeee;
+
+    padding-bottom: 10px;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .dashboard-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .form-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .grade-buttons {
+
+        flex-direction: column;
+
+    }
+
+    .buttons {
+
+        flex-direction: column;
+
+    }
+
+    .question {
+
+        font-size: 19px;
+
+    }
+
+    .card {
+
+        padding: 20px;
+
+    }
+
+    .history-table {
+
+        display: block;
+
+        overflow-x: auto;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .dashboard-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
 </style>
+
 </head>
+
+
 <body>
-<div class="card">
-  <h1 class="title">🍔 Preguntas Crew BK</h1>
-  <p class="subtitle">Selector aleatorio para capacitación verbal</p>
-  <div class="counter" id="counter">Listo para comenzar</div>
-  <div class="question" id="question">Presioná “Sacar pregunta” para comenzar.</div>
-  <button id="next" onclick="nextQuestion()">🎲 Sacar pregunta</button>
-  <button id="reset" onclick="resetRound()">🔄 Nueva ronda</button>
+
+
+<header>
+
+    <h1>
+        🍔 Evaluación de Conocimientos
+    </h1>
+
+    <p>
+        Burger King
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- ======================================
+     INICIO
+======================================= -->
+
+<div id="inicio" class="card">
+
+    <h2>
+        📝 Nueva evaluación
+    </h2>
+
+
+    <div class="section-title">
+
+        Datos de la evaluación
+
+    </div>
+
+
+    <div class="form-grid">
+
+
+        <div class="form-group">
+
+            <label>
+                Asociado
+            </label>
+
+            <input
+                type="text"
+                id="asociado"
+                placeholder="Nombre del asociado">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Local
+            </label>
+
+            <input
+                type="text"
+                id="local"
+                placeholder="Ej.: Nombre del local">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Puesto
+            </label>
+
+            <input
+                type="text"
+                id="puesto"
+                placeholder="Puesto">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Evaluador
+            </label>
+
+            <input
+                type="text"
+                id="evaluador"
+                placeholder="Nombre del evaluador">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Categoría
+            </label>
+
+            <select id="categoria">
+
+                <option value="">
+
+                    Cargando categorías...
+
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Cantidad de preguntas
+            </label>
+
+            <select id="cantidad">
+
+                <option value="5">
+                    5 preguntas
+                </option>
+
+                <option value="10">
+                    10 preguntas
+                </option>
+
+                <option value="15">
+                    15 preguntas
+                </option>
+
+                <option value="20">
+                    20 preguntas
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="buttons">
+
+
+        <button
+            class="btn-primary"
+            onclick="iniciarEvaluacion()">
+
+            ▶️ Iniciar evaluación
+
+        </button>
+
+
+        <button
+            class="btn-secondary"
+            onclick="mostrarDashboard()">
+
+            📊 Dashboard
+
+        </button>
+
+
+        <button
+            class="btn-secondary"
+            onclick="mostrarHistorial()">
+
+            📋 Ver historial
+
+        </button>
+
+        <button class="btn-secondary" onclick="mostrarResumenAsociado()">
+            🔎 Resumen de Asociado
+        </button>
+
+
+    </div>
+
 </div>
 
+
+
+<!-- ======================================
+     DASHBOARD
+======================================= -->
+
+<div
+    id="dashboard"
+    class="card hidden">
+
+
+    <div class="question-number">
+
+        📊 Dashboard de Entrenamiento
+
+    </div>
+
+
+    <p
+        style="
+            text-align:center;
+            margin-bottom:25px;
+        ">
+
+        Resumen general de las evaluaciones
+        de conocimientos
+
+    </p>
+
+
+    <!-- RESUMEN GENERAL -->
+
+    <div class="dashboard-grid">
+
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-icon">
+                👥
+            </div>
+
+            <div class="dashboard-title">
+                Asociados evaluados
+            </div>
+
+            <div
+                class="dashboard-value"
+                id="totalAsociados">
+
+                —
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-icon">
+                📝
+            </div>
+
+            <div class="dashboard-title">
+                Evaluaciones realizadas
+            </div>
+
+            <div
+                class="dashboard-value"
+                id="totalEvaluaciones">
+
+                —
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-icon">
+                📈
+            </div>
+
+            <div class="dashboard-title">
+                Promedio general
+            </div>
+
+            <div
+                class="dashboard-value"
+                id="promedioGeneral">
+
+                —
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-icon">
+                🟢
+            </div>
+
+            <div class="dashboard-title">
+                Satisfactorias (80% o más)
+            </div>
+
+            <div
+                class="dashboard-value"
+                id="satisfactorioSuperior">
+
+                —
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULTADOS POR LOCAL -->
+
+    <div class="dashboard-section">
+
+        <h3>
+            📍 Resultados por local
+        </h3>
+
+        <div id="resultadosLocales">
+
+            <div class="empty">
+
+                Los resultados aparecerán aquí.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RESULTADOS POR CATEGORÍA -->
+
+    <div class="dashboard-section">
+
+        <h3>
+            📚 Resultados por categoría
+        </h3>
+
+        <div id="resultadosCategorias">
+
+            <div class="empty">
+
+                Los resultados aparecerán aquí.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONOCIMIENTOS A REFORZAR -->
+
+    <div class="dashboard-section">
+
+        <h3>
+            🚨 Principales conocimientos a reforzar
+        </h3>
+
+        <div id="conocimientosReforzar">
+
+            <div class="empty">
+
+                Los resultados aparecerán aquí.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="btn-secondary"
+        onclick="volverInicioDashboard()">
+
+        ⬅️ Volver al inicio
+
+    </button>
+
+</div>
+
+
+
+<!-- ======================================
+     EVALUACIÓN
+======================================= -->
+
+<div
+    id="evaluacion"
+    class="card hidden">
+
+
+    <div
+        class="question-number"
+        id="numeroPregunta">
+
+        Pregunta 1 de 10
+
+    </div>
+
+
+    <div class="progress-container">
+
+        <div
+            class="progress"
+            id="barraProgreso">
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="category-badge"
+        id="categoriaPregunta">
+
+    </div>
+
+
+    <div
+        class="question"
+        id="textoPregunta">
+
+    </div>
+
+
+    <button
+        class="btn-secondary"
+        id="btnRespuesta"
+        onclick="mostrarRespuesta()">
+
+        👁️ Ver respuesta correcta
+
+    </button>
+
+
+    <div
+        class="answer-box"
+        id="respuestaBox">
+
+
+        <div class="answer-title">
+
+            Respuesta correcta:
+
+        </div>
+
+
+        <div id="textoRespuesta">
+
+        </div>
+
+    </div>
+
+
+    <div class="grade-buttons">
+
+
+        <button
+            class="btn-correct"
+            onclick="calificar(true)">
+
+            🟢 Correcta
+
+        </button>
+
+
+        <button
+            class="btn-incorrect"
+            onclick="calificar(false)">
+
+            🔴 Incorrecta
+
+        </button>
+
+    </div>
+
+
+    <div class="cancel-area">
+
+        <button
+            class="btn-danger"
+            onclick="cancelarEvaluacion()">
+
+            ✖ Cancelar evaluación
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ======================================
+     RESULTADO
+======================================= -->
+
+<div
+    id="resultado"
+    class="card hidden">
+
+
+    <h2>
+        📊 Resultado de la evaluación
+    </h2>
+
+
+    <div
+        class="result-score"
+        id="puntajeFinal">
+
+        0%
+
+    </div>
+
+
+    <div
+        class="result-level"
+        id="nivelFinal">
+
+    </div>
+
+
+    <div class="result-box">
+
+
+        <div class="result-item">
+
+            🟢 Correctas:
+
+            <strong id="correctasFinal">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="result-item">
+
+            🔴 Incorrectas:
+
+            <strong id="incorrectasFinal">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="result-item">
+
+            📚 Cantidad de preguntas:
+
+            <strong id="cantidadFinal">
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="recommendation">
+
+
+        <strong>
+            💡 Recomendación
+        </strong>
+
+
+        <div id="recomendacionFinal">
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="detail-list"
+        id="detalleResultado">
+
+    </div>
+
+
+    <div
+        class="save-message"
+        id="mensajeGuardado">
+
+    </div>
+
+
+    <div class="buttons">
+
+
+        <button
+            class="btn-primary"
+            onclick="nuevaEvaluacion()">
+
+            🔄 Nueva evaluación
+
+        </button>
+
+
+        <button
+            class="btn-secondary"
+            onclick="mostrarHistorial()">
+
+            📋 Ver historial
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ======================================
+     HISTORIAL
+======================================= -->
+
+<div
+    id="historial"
+    class="card hidden">
+
+
+    <h2>
+        📋 Historial de evaluaciones
+    </h2>
+
+
+    <div id="historialContenido">
+
+        <div class="loading">
+
+            Cargando historial...
+
+        </div>
+
+    </div>
+
+
+    <div class="buttons">
+
+
+        <button
+            class="btn-secondary"
+            onclick="volverInicio()">
+
+            ← Volver
+
+        </button>
+
+    </div>
+
+</div>
+
+<div id="resumenAsociado" class="card hidden">
+    <h2>🔎 Resumen de Asociado</h2>
+    <p style="text-align:center;margin-bottom:20px;">Consultá el historial individual y los conocimientos que necesitan refuerzo.</p>
+    <label for="busquedaAsociado">Nombre del asociado</label>
+    <input id="busquedaAsociado" type="search" placeholder="Escribí el nombre del asociado..." oninput="buscarResumenAsociado()" style="width:100%;padding:12px;margin:12px 0 18px;border:1px solid #ddd;border-radius:8px;box-sizing:border-box;">
+    <div id="contenidoResumenAsociado" aria-live="polite"><div class="empty">Escribí un nombre para consultar sus evaluaciones.</div></div>
+    <div class="buttons"><button class="btn-secondary" onclick="volverDesdeResumen()">← Volver</button></div>
+</div>
+
+</div>
+
+
+
+<iframe
+    name="guardarFrame"
+    id="guardarFrame"
+    style="display:none;">
+
+</iframe>
+
+
+
 <script>
-const questions = ["¿Cuál es la distancia mínima que deben estar los estantes del suelo en bodegas?", "¿Cuántos centímetros deben mantenerse las cajas de la pared?", "¿Qué producto tiene 0 minutos de retención?", "¿Qué tipo de pinza se usa para productos cocinados?", "¿Con qué frecuencia se deben higienizar las bandejas de PHU?", "¿Cuál es la distancia correcta del salero ACCUSALT sobre las papas?", "¿Qué representa el GPLS?", "¿Cada cuánto tiempo deben lavarse las manos?", "¿Qué representa la sigla PPP?", "¿Qué utensilio se usa para carne cruda?", "¿Qué es el salero ACCUTASTE?", "¿Cada cuánto tiempo deben realizarse las limpiezas del batidor de la máquina de batidos Taylor?", "¿Cuál es la temperatura de zona de peligro para los productos alimenticios?", "¿Cuántas cajas pueden apilarse como máximo en la bodega?", "¿Qué herramienta ayuda a los gerentes a comunicar metas y desempeño del restaurante?", "¿Cuántas vueltas de helado debe tener un cono?", "¿Qué es el método C.E.D.S.A?", "¿Qué significa C.E.D.S.A?", "¿Qué se hace primero en el lavado de manos según los procedimientos?", "¿Cuáles son los 5 pasos de atención al invitado?", "¿Qué son los alérgenos?", "¿Cuál es la temperatura mínima del agua caliente para lavado de manos?", "¿Cuál es el tiempo de retención del pan tostado?", "¿Cuál es el peso de la Whopper de Oro?", "¿Qué debe hacer un compañero cuando vuelve del baño y se dispone a retomar sus actividades?", "¿Qué producto tiene un tiempo de retención de 10 minutos?", "¿Cuántas horas antes se deben sacar los productos para que tomen temperatura ambiente?", "¿Qué acción se debe realizar una vez cocinada la carne, ubicada correctamente la tanda en la bandeja y colocada en la cavidad de la PHU?", "¿Qué desinfectante sirve para la desinfección de superficies?", "¿Qué se debe usar para medir la concentración de soluciones sanitizantes?"];
-let remaining = [...Array(questions.length).keys()];
-let asked = 0;
 
-function nextQuestion() {
-  if (remaining.length === 0) {
-    document.getElementById('counter').innerHTML =
-      '<span class="done">🎉 Ronda completada: 30 de 30</span>';
-    document.getElementById('question').textContent =
-      'Ya salieron todas las preguntas. Iniciá una nueva ronda para volver a jugar.';
-    return;
-  }
 
-  const randomPosition = Math.floor(Math.random() * remaining.length);
-  const questionIndex = remaining.splice(randomPosition, 1)[0];
-  asked++;
+/* =========================================
+   CONFIGURACIÓN
+========================================= */
 
-  document.getElementById('counter').textContent =
-    `Pregunta ${asked} de ${questions.length}`;
-  document.getElementById('question').textContent = questions[questionIndex];
+const URL_SCRIPT =
+"https://script.google.com/macros/s/AKfycbxPq2erqKVpM6x85fQg0maTr_tgdTZCOWs_8HV9C8X2UGnUgfzycwHNbd29wNd922w7/exec";
+
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+let preguntas = [];
+
+let preguntasEvaluacion = [];
+
+let resultadosPreguntas = [];
+
+let preguntaActual = 0;
+
+let correctas = 0;
+
+let incorrectas = 0;
+
+let datosEvaluacion = {};
+
+
+/* =========================================
+   CONVERTIR PUNTAJE
+========================================= */
+
+function convertirPuntaje(valor) {
+
+    if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ) {
+
+        return NaN;
+
+    }
+
+
+    let texto =
+        String(valor)
+            .trim()
+            .replace("%", "")
+            .replace(",", ".");
+
+
+    let puntaje =
+        Number(texto);
+
+
+    if (isNaN(puntaje)) {
+
+        return NaN;
+
+    }
+
+
+    /*
+       Google Sheets puede devolver
+       un porcentaje como decimal.
+
+       Ejemplo:
+
+       60% → 0.6
+
+       En ese caso lo convertimos
+       a 60.
+    */
+
+    if (
+        puntaje > 0 &&
+        puntaje <= 1
+    ) {
+
+        puntaje =
+            puntaje * 100;
+
+    }
+
+
+    return puntaje;
+
 }
 
-function resetRound() {
-  remaining = [...Array(questions.length).keys()];
-  asked = 0;
-  document.getElementById('counter').textContent = 'Nueva ronda';
-  document.getElementById('question').textContent =
-    'Presioná “Sacar pregunta” para comenzar.';
+
+/* =========================================
+   VALIDAR EVALUACIÓN
+========================================= */
+
+function esEvaluacionValida(e) {
+
+    if (!e) {
+
+        return false;
+
+    }
+
+
+    const asociado =
+        String(
+            e.asociado || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const local =
+        String(
+            e.local || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const puesto =
+        String(
+            e.puesto || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const evaluador =
+        String(
+            e.evaluador || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    /*
+       Evitamos que filas antiguas,
+       encabezados o datos de prueba
+       sean considerados evaluaciones.
+    */
+
+    const valoresInvalidos = [
+        "asociado",
+        "local",
+        "puesto",
+        "evaluador",
+        "categoría",
+        "categoria",
+        "fecha"
+    ];
+
+
+    if (
+        valoresInvalidos.includes(asociado) ||
+        valoresInvalidos.includes(local) ||
+        valoresInvalidos.includes(puesto) ||
+        valoresInvalidos.includes(evaluador)
+    ) {
+
+        return false;
+
+    }
+
+
+    if (
+        !e.asociado ||
+        !e.local ||
+        !e.puntaje
+    ) {
+
+        return false;
+
+    }
+
+
+    return true;
+
 }
+
+
+
+/* =========================================
+   CARGAR PREGUNTAS
+========================================= */
+
+function cargarPreguntas() {
+
+
+    const script =
+        document.createElement("script");
+
+
+    script.src =
+        URL_SCRIPT +
+        "?callback=callbackPreguntas";
+
+
+    document.body.appendChild(script);
+
+}
+
+
+function callbackPreguntas(data) {
+
+
+    if (!data.success) {
+
+        alert(
+            "No se pudieron cargar las preguntas."
+        );
+
+        return;
+
+    }
+
+
+    preguntas =
+        data.preguntas || [];
+
+
+    cargarCategorias();
+
+}
+
+
+
+/* =========================================
+   CATEGORÍAS
+========================================= */
+
+function cargarCategorias() {
+
+
+    const select =
+        document.getElementById("categoria");
+
+
+    select.innerHTML =
+        '<option value="">Seleccione una categoría</option>';
+
+
+    const categorias =
+        [...new Set(
+
+            preguntas
+                .map(p => p.categoria)
+                .filter(c => c)
+
+        )];
+
+
+    categorias.forEach(categoria => {
+
+
+        const option =
+            document.createElement("option");
+
+
+        option.value =
+            categoria;
+
+
+        option.textContent =
+            categoria;
+
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+
+/* =========================================
+   INICIAR EVALUACIÓN
+========================================= */
+
+function iniciarEvaluacion() {
+
+
+    const asociado =
+        document.getElementById("asociado")
+        .value.trim();
+
+
+    const local =
+        document.getElementById("local")
+        .value.trim();
+
+
+    const puesto =
+        document.getElementById("puesto")
+        .value.trim();
+
+
+    const evaluador =
+        document.getElementById("evaluador")
+        .value.trim();
+
+
+    const categoria =
+        document.getElementById("categoria")
+        .value;
+
+
+    const cantidad =
+        Number(
+            document.getElementById("cantidad")
+            .value
+        );
+
+
+    if (
+        !asociado ||
+        !local ||
+        !puesto ||
+        !evaluador ||
+        !categoria
+    ) {
+
+
+        alert(
+            "Por favor, complete todos los datos antes de iniciar."
+        );
+
+
+        return;
+
+    }
+
+
+    const disponibles =
+        preguntas.filter(
+            p => p.categoria === categoria
+        );
+
+
+    if (cantidad > disponibles.length) {
+
+
+        alert(
+            "La categoría seleccionada tiene solamente " +
+            disponibles.length +
+            " preguntas activas."
+        );
+
+
+        return;
+
+    }
+
+
+    preguntasEvaluacion =
+        [...disponibles]
+            .sort(
+                () => Math.random() - 0.5
+            )
+            .slice(
+                0,
+                cantidad
+            );
+
+
+    preguntaActual = 0;
+
+    correctas = 0;
+
+    incorrectas = 0;
+
+    resultadosPreguntas = [];
+
+
+    datosEvaluacion = {
+
+        asociado,
+        local,
+        puesto,
+        evaluador,
+        categoria,
+        cantidad
+
+    };
+
+
+    document.getElementById("inicio")
+        .classList.add("hidden");
+
+
+    document.getElementById("historial")
+        .classList.add("hidden");
+
+
+    document.getElementById("resultado")
+        .classList.add("hidden");
+
+
+    document.getElementById("dashboard")
+        .classList.add("hidden");
+
+
+    document.getElementById("evaluacion")
+        .classList.remove("hidden");
+
+
+    mostrarPregunta();
+
+}
+
+
+
+/* =========================================
+   MOSTRAR PREGUNTA
+========================================= */
+
+function mostrarPregunta() {
+
+
+    const pregunta =
+        preguntasEvaluacion[preguntaActual];
+
+
+    document.getElementById("numeroPregunta")
+        .textContent =
+        "Pregunta " +
+        (preguntaActual + 1) +
+        " de " +
+        preguntasEvaluacion.length;
+
+
+    document.getElementById("categoriaPregunta")
+        .textContent =
+        pregunta.categoria;
+
+
+    document.getElementById("textoPregunta")
+        .textContent =
+        pregunta.pregunta;
+
+
+    document.getElementById("textoRespuesta")
+        .textContent =
+        pregunta.respuesta;
+
+
+    document.getElementById("respuestaBox")
+        .style.display =
+        "none";
+
+
+    document.getElementById("btnRespuesta")
+        .style.display =
+        "inline-block";
+
+
+    const progreso =
+        (
+            preguntaActual /
+            preguntasEvaluacion.length
+        ) * 100;
+
+
+    document.getElementById("barraProgreso")
+        .style.width =
+        progreso + "%";
+
+}
+
+
+
+/* =========================================
+   MOSTRAR RESPUESTA
+========================================= */
+
+function mostrarRespuesta() {
+
+
+    document.getElementById("respuestaBox")
+        .style.display =
+        "block";
+
+
+    document.getElementById("btnRespuesta")
+        .style.display =
+        "none";
+
+}
+
+
+
+/* =========================================
+   CALIFICAR
+========================================= */
+
+function calificar(esCorrecta) {
+
+
+    const pregunta =
+        preguntasEvaluacion[preguntaActual];
+
+
+    if (esCorrecta) {
+
+        correctas++;
+
+    }
+
+    else {
+
+        incorrectas++;
+
+    }
+
+
+    resultadosPreguntas.push({
+
+        pregunta:
+            pregunta.pregunta,
+
+        categoria:
+            pregunta.categoria,
+
+        respuesta:
+            pregunta.respuesta,
+
+        resultado:
+            esCorrecta
+                ? "Correcta"
+                : "Incorrecta"
+
+    });
+
+
+    preguntaActual++;
+
+
+    if (
+        preguntaActual >=
+        preguntasEvaluacion.length
+    ) {
+
+        finalizarEvaluacion();
+
+    }
+
+    else {
+
+        mostrarPregunta();
+
+    }
+
+}
+
+
+
+/* =========================================
+   FINALIZAR
+========================================= */
+
+function finalizarEvaluacion() {
+
+
+    const total =
+        preguntasEvaluacion.length;
+
+
+    const puntaje =
+        Math.round(
+            (
+                correctas /
+                total
+            ) * 100
+        );
+
+
+    let nivel = "";
+
+    let recomendacion = "";
+
+
+    if (puntaje >= 90) {
+
+
+        nivel =
+            "🟢 EXCELENTE";
+
+
+        recomendacion =
+            "Mantener el nivel de conocimientos y continuar reforzando las buenas prácticas.";
+
+    }
+
+
+    else if (puntaje >= 80) {
+
+
+        nivel =
+            "🟢 SATISFACTORIO";
+
+
+        recomendacion =
+            "Reforzar los conocimientos relacionados con los procedimientos en los que se hayan presentado dificultades.";
+
+    }
+
+
+    else if (puntaje >= 70) {
+
+
+        nivel =
+            "🟡 EN DESARROLLO";
+
+
+        recomendacion =
+            "Realizar un refuerzo de los procedimientos y volver a evaluar los conocimientos posteriormente.";
+
+    }
+
+
+    else {
+
+
+        nivel =
+            "🔴 REQUIERE REFUERZO";
+
+
+        recomendacion =
+            "Realizar un refuerzo integral de los procedimientos y programar una nueva evaluación.";
+
+    }
+
+
+    document.getElementById("puntajeFinal")
+        .textContent =
+        puntaje + "%";
+
+
+    document.getElementById("nivelFinal")
+        .textContent =
+        nivel;
+
+
+    document.getElementById("correctasFinal")
+        .textContent =
+        correctas;
+
+
+    document.getElementById("incorrectasFinal")
+        .textContent =
+        incorrectas;
+
+
+    document.getElementById("cantidadFinal")
+        .textContent =
+        total;
+
+
+    document.getElementById("recomendacionFinal")
+        .textContent =
+        recomendacion;
+
+
+    mostrarDetalle();
+
+
+    document.getElementById("evaluacion")
+        .classList.add("hidden");
+
+
+    document.getElementById("resultado")
+        .classList.remove("hidden");
+
+
+    guardarEvaluacion(
+        puntaje,
+        nivel,
+        recomendacion
+    );
+
+}
+
+
+
+/* =========================================
+   DETALLE DE RESULTADOS
+========================================= */
+
+function mostrarDetalle() {
+
+
+    const contenedor =
+        document.getElementById(
+            "detalleResultado"
+        );
+
+
+    let html = `
+
+        <h3 style="color:#a33418;">
+
+            📚 Detalle de la evaluación
+
+        </h3>
+
+    `;
+
+
+    resultadosPreguntas.forEach(
+
+        (resultado, indice) => {
+
+
+            const esCorrecta =
+                resultado.resultado ===
+                "Correcta";
+
+
+            html += `
+
+                <div class="
+                    detail-item
+                    ${
+                        esCorrecta
+                            ? "detail-correct"
+                            : "detail-incorrect"
+                    }
+                ">
+
+
+                    <div class="detail-question">
+
+
+                        ${
+                            esCorrecta
+                                ? "🟢"
+                                : "🔴"
+                        }
+
+
+                        Pregunta
+                        ${indice + 1}:
+
+
+                        ${resultado.pregunta}
+
+
+                    </div>
+
+
+                    <div class="detail-category">
+
+
+                        Categoría:
+                        ${resultado.categoria}
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+        }
+
+    );
+
+
+    contenedor.innerHTML =
+        html;
+
+}
+
+
+
+/* =========================================
+   GUARDAR EVALUACIÓN
+========================================= */
+
+function guardarEvaluacion(
+    puntaje,
+    nivel,
+    recomendacion
+) {
+
+
+    const form =
+        document.createElement("form");
+
+
+    form.method =
+        "POST";
+
+
+    form.action =
+        URL_SCRIPT;
+
+
+    form.target =
+        "guardarFrame";
+
+
+    const detalle =
+        resultadosPreguntas
+            .map(
+
+                (r, i) =>
+
+                    (i + 1) +
+                    ". [" +
+                    r.resultado +
+                    "] " +
+                    r.categoria +
+                    " - " +
+                    r.pregunta
+
+            )
+            .join(" | ");
+
+
+    const datos = {
+
+
+        asociado:
+            datosEvaluacion.asociado,
+
+
+        local:
+            datosEvaluacion.local,
+
+
+        puesto:
+            datosEvaluacion.puesto,
+
+
+        evaluador:
+            datosEvaluacion.evaluador,
+
+
+        cantidad:
+            datosEvaluacion.cantidad,
+
+
+        correctas:
+            correctas,
+
+
+        incorrectas:
+            incorrectas,
+
+
+        puntaje:
+            puntaje + "%",
+
+
+        nivel:
+            nivel,
+
+
+        recomendacion:
+            recomendacion,
+
+
+        categoria:
+            datosEvaluacion.categoria,
+
+
+        detalle:
+            detalle
+
+    };
+
+
+    Object.keys(datos).forEach(clave => {
+
+
+        const input =
+            document.createElement(
+                "input"
+            );
+
+
+        input.type =
+            "hidden";
+
+
+        input.name =
+            clave;
+
+
+        input.value =
+            datos[clave];
+
+
+        form.appendChild(input);
+
+    });
+
+
+    document.body.appendChild(form);
+
+
+    form.submit();
+
+
+    form.remove();
+
+
+    document.getElementById(
+        "mensajeGuardado"
+    )
+        .textContent =
+        "✓ Evaluación guardada correctamente";
+
+}
+
+
+
+/* =========================================
+   CANCELAR
+========================================= */
+
+function cancelarEvaluacion() {
+
+
+    const confirmar =
+        confirm(
+
+            "¿Está seguro de cancelar esta evaluación?\n\n" +
+            "El progreso actual se perderá y no se guardará."
+
+        );
+
+
+    if (!confirmar) return;
+
+
+    preguntasEvaluacion = [];
+
+    resultadosPreguntas = [];
+
+    preguntaActual = 0;
+
+    correctas = 0;
+
+    incorrectas = 0;
+
+
+    document.getElementById("evaluacion")
+        .classList.add("hidden");
+
+
+    document.getElementById("inicio")
+        .classList.remove("hidden");
+
+}
+
+
+
+/* =========================================
+   NUEVA EVALUACIÓN
+========================================= */
+
+function nuevaEvaluacion() {
+
+
+    document.getElementById("resultado")
+        .classList.add("hidden");
+
+
+    document.getElementById("inicio")
+        .classList.remove("hidden");
+
+}
+
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+function mostrarDashboard() {
+
+
+    document.getElementById("inicio")
+        .classList.add("hidden");
+
+
+    document.getElementById("resultado")
+        .classList.add("hidden");
+
+
+    document.getElementById("evaluacion")
+        .classList.add("hidden");
+
+
+    document.getElementById("historial")
+        .classList.add("hidden");
+
+
+    document.getElementById("dashboard")
+        .classList.remove("hidden");
+
+
+    document.getElementById("totalAsociados")
+        .innerText =
+        "Cargando...";
+
+
+    document.getElementById("totalEvaluaciones")
+        .innerText =
+        "Cargando...";
+
+
+    document.getElementById("promedioGeneral")
+        .innerText =
+        "Cargando...";
+
+
+    document.getElementById("satisfactorioSuperior")
+        .innerText =
+        "Cargando...";
+
+
+    const script =
+        document.createElement("script");
+
+
+    script.src =
+        URL_SCRIPT +
+        "?accion=historial&callback=callbackDashboard";
+
+
+    document.body.appendChild(script);
+
+}
+
+
+
+/* =========================================
+   CALLBACK DASHBOARD
+========================================= */
+
+function callbackDashboard(data) {
+
+
+    if (!data.success) {
+
+
+        document.getElementById(
+            "totalAsociados"
+        )
+            .innerText =
+            "—";
+
+
+        document.getElementById(
+            "totalEvaluaciones"
+        )
+            .innerText =
+            "—";
+
+
+        document.getElementById(
+            "promedioGeneral"
+        )
+            .innerText =
+            "—";
+
+
+        document.getElementById(
+            "satisfactorioSuperior"
+        )
+            .innerText =
+            "—";
+
+
+        return;
+
+    }
+
+
+    /*
+       Filtramos registros inválidos
+       antes de hacer cualquier cálculo.
+    */
+
+    const evaluaciones =
+        (data.evaluaciones || [])
+            .filter(esEvaluacionValida);
+
+
+    /* ================================
+       TOTAL DE EVALUACIONES
+    ================================= */
+
+    const totalEvaluaciones =
+        evaluaciones.length;
+
+
+    document.getElementById(
+        "totalEvaluaciones"
+    )
+        .innerText =
+        totalEvaluaciones;
+
+
+
+    /* ================================
+       ASOCIADOS EVALUADOS
+    ================================= */
+
+    const asociados =
+        new Set(
+
+            evaluaciones
+                .map(
+                    e => e.asociado
+                )
+                .filter(
+                    a => a
+                )
+
+        );
+
+
+    document.getElementById(
+        "totalAsociados"
+    )
+        .innerText =
+        asociados.size;
+
+
+
+    /* ================================
+       PROMEDIO GENERAL
+    ================================= */
+
+    let sumaPuntajes = 0;
+
+    let evaluacionesConPuntaje = 0;
+
+
+    evaluaciones.forEach(e => {
+
+
+        const puntaje =
+            convertirPuntaje(
+                e.puntaje
+            );
+
+
+        if (!isNaN(puntaje)) {
+
+            sumaPuntajes +=
+                puntaje;
+
+            evaluacionesConPuntaje++;
+
+        }
+
+    });
+
+
+    const promedio =
+        evaluacionesConPuntaje > 0
+
+            ? sumaPuntajes /
+              evaluacionesConPuntaje
+
+            : 0;
+
+
+    document.getElementById(
+        "promedioGeneral"
+    )
+        .innerText =
+        Math.round(
+            promedio
+        ) + "%";
+
+
+
+    /* ================================
+       SATISFACTORIO O SUPERIOR
+    ================================= */
+
+    let satisfactorios = 0;
+
+
+    evaluaciones.forEach(e => {
+
+
+        const puntaje =
+            convertirPuntaje(
+                e.puntaje
+            );
+
+
+        if (
+
+            !isNaN(puntaje) &&
+            puntaje >= 80
+
+        ) {
+
+            satisfactorios++;
+
+        }
+
+    });
+
+
+    const porcentajeSatisfactorio =
+        totalEvaluaciones > 0
+
+            ? (
+                satisfactorios /
+                totalEvaluaciones
+            ) * 100
+
+            : 0;
+
+
+    document.getElementById(
+        "satisfactorioSuperior"
+    )
+        .innerText =
+        Math.round(
+            porcentajeSatisfactorio
+        ) + "%";
+
+
+
+    /* =========================================
+       RESULTADOS POR LOCAL
+    ========================================= */
+
+    const locales = {};
+
+
+    evaluaciones.forEach(e => {
+
+
+        const local =
+            String(
+                e.local || ""
+            ).trim();
+
+
+        if (!local) {
+
+            return;
+
+        }
+
+
+        if (!locales[local]) {
+
+            locales[local] = {
+
+                evaluaciones: 0,
+
+                sumaPuntajes: 0,
+
+                evaluacionesConPuntaje: 0,
+
+                satisfactorias: 0
+
+            };
+
+        }
+
+
+        const puntaje =
+            convertirPuntaje(
+                e.puntaje
+            );
+
+
+        locales[local]
+            .evaluaciones++;
+
+
+        if (!isNaN(puntaje)) {
+
+
+            locales[local]
+                .sumaPuntajes +=
+                puntaje;
+
+
+            locales[local]
+                .evaluacionesConPuntaje++;
+
+
+            if (puntaje >= 80) {
+
+                locales[local]
+                    .satisfactorias++;
+
+            }
+
+        }
+
+    });
+
+
+    let htmlLocales = `
+
+        <table class="history-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Local</th>
+
+                    <th>Evaluaciones</th>
+
+                    <th>Promedio</th>
+
+                    <th>Satisfactorias (80% o más)</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    Object.keys(locales).forEach(local => {
+
+
+        const datos =
+            locales[local];
+
+
+        const promedioLocal =
+            datos.evaluacionesConPuntaje > 0
+
+                ? datos.sumaPuntajes /
+                  datos.evaluacionesConPuntaje
+
+                : 0;
+
+
+        const porcentajeSatisfactorioLocal =
+            datos.evaluaciones > 0
+
+                ? (
+                    datos.satisfactorias /
+                    datos.evaluaciones
+                ) * 100
+
+                : 0;
+
+
+        htmlLocales += `
+
+            <tr>
+
+                <td>
+                    <strong>
+                        ${local}
+                    </strong>
+                </td>
+
+                <td>
+                    ${datos.evaluaciones}
+                </td>
+
+                <td>
+                    <strong>
+                        ${Math.round(
+                            promedioLocal
+                        )}%
+                    </strong>
+                </td>
+
+                <td>
+                    ${Math.round(
+                        porcentajeSatisfactorioLocal
+                    )}%
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    if (
+        Object.keys(locales).length === 0
+    ) {
+
+
+        htmlLocales = `
+
+            <div class="empty">
+
+                No hay resultados válidos por local.
+
+            </div>
+
+        `;
+
+    }
+
+    else {
+
+
+        htmlLocales += `
+
+                </tbody>
+
+            </table>
+
+        `;
+
+    }
+
+
+    document.getElementById(
+        "resultadosLocales"
+    )
+        .innerHTML =
+        htmlLocales;
+
+
+
+    /* =========================================
+       RESULTADOS POR CATEGORÍA
+    ========================================= */
+
+    const categorias = {};
+
+
+    evaluaciones.forEach(e => {
+
+
+        const categoria =
+            String(
+                e.categoria || ""
+            ).trim();
+
+
+        if (!categoria) {
+
+            return;
+
+        }
+
+
+        if (!categorias[categoria]) {
+
+            categorias[categoria] = {
+
+                evaluaciones: 0,
+
+                sumaPuntajes: 0,
+
+                evaluacionesConPuntaje: 0,
+
+                satisfactorias: 0
+
+            };
+
+        }
+
+
+        const puntaje =
+            convertirPuntaje(
+                e.puntaje
+            );
+
+
+        categorias[categoria]
+            .evaluaciones++;
+
+
+        if (!isNaN(puntaje)) {
+
+
+            categorias[categoria]
+                .sumaPuntajes +=
+                puntaje;
+
+
+            categorias[categoria]
+                .evaluacionesConPuntaje++;
+
+
+            if (puntaje >= 80) {
+
+                categorias[categoria]
+                    .satisfactorias++;
+
+            }
+
+        }
+
+    });
+
+
+    let htmlCategorias = `
+
+        <table class="history-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Categoría</th>
+
+                    <th>Evaluaciones</th>
+
+                    <th>Promedio</th>
+
+                    <th>Satisfactorias (80% o más)</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+    `;
+
+
+    Object.keys(categorias)
+        .forEach(categoria => {
+
+
+            const datos =
+                categorias[categoria];
+
+
+            const promedioCategoria =
+                datos.evaluacionesConPuntaje > 0
+
+                    ? datos.sumaPuntajes /
+                      datos.evaluacionesConPuntaje
+
+                    : 0;
+
+
+            const porcentajeSatisfactorioCategoria =
+                datos.evaluaciones > 0
+
+                    ? (
+                        datos.satisfactorias /
+                        datos.evaluaciones
+                    ) * 100
+
+                    : 0;
+
+
+            htmlCategorias += `
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            ${categoria}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${datos.evaluaciones}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${Math.round(
+                                promedioCategoria
+                            )}%
+                        </strong>
+                    </td>
+
+                    <td>
+                        ${Math.round(
+                            porcentajeSatisfactorioCategoria
+                        )}%
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
+
+
+    if (
+        Object.keys(categorias).length === 0
+    ) {
+
+
+        htmlCategorias = `
+
+            <div class="empty">
+
+                No hay resultados válidos por categoría.
+
+            </div>
+
+        `;
+
+    }
+
+    else {
+
+
+        htmlCategorias += `
+
+                </tbody>
+
+            </table>
+
+        `;
+
+    }
+
+
+    document.getElementById(
+        "resultadosCategorias"
+    )
+        .innerHTML =
+        htmlCategorias;
+
+
+    /* =========================================
+       PRINCIPALES CONOCIMIENTOS A REFORZAR
+       Se identifican las preguntas marcadas como
+       [Incorrecta] en el detalle de cada evaluación.
+    ========================================= */
+
+    const erroresPorPregunta = {};
+
+    evaluaciones.forEach(e => {
+
+        const detalle = String(e.detalle || "");
+        if (!detalle.trim()) return;
+
+        const regexIncorrectas = /(?:^|\|\s*)\d+\.\s*\[Incorrecta\]\s*(.*?)\s*-\s*(.*?)(?=\s*\|\s*\d+\.\s*\[|$)/gi;
+        let coincidencia;
+
+        while ((coincidencia = regexIncorrectas.exec(detalle)) !== null) {
+
+            const categoria = String(coincidencia[1] || "Sin categoría").trim();
+            const pregunta = String(coincidencia[2] || "").trim();
+            if (!pregunta) continue;
+
+            const clave = (categoria + "|||" + pregunta).toLocaleLowerCase();
+
+            if (!erroresPorPregunta[clave]) {
+                erroresPorPregunta[clave] = {
+                    categoria: categoria,
+                    pregunta: pregunta,
+                    errores: 0
+                };
+            }
+
+            erroresPorPregunta[clave].errores++;
+        }
+
+    });
+
+    const preguntasReforzar = Object.values(erroresPorPregunta)
+        .sort((a, b) => b.errores - a.errores || a.pregunta.localeCompare(b.pregunta, "es"))
+        .slice(0, 5);
+
+    const escaparHTML = texto => String(texto)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+
+    let htmlReforzar = "";
+
+    if (preguntasReforzar.length === 0) {
+
+        htmlReforzar = `
+            <div class="empty">
+                Aún no hay suficientes evaluaciones con detalle de respuestas incorrectas para identificar conocimientos a reforzar.
+            </div>
+        `;
+
+    } else {
+
+        htmlReforzar = `
+            <p style="margin-top:0; color:#666;">
+                Preguntas incorrectas más frecuentes según el historial de evaluaciones:
+            </p>
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Conocimiento a reforzar</th>
+                        <th>Errores registrados</th>
+                        <th>Recomendación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${preguntasReforzar.map(item => {
+                        const recomendacion = item.categoria.toLocaleLowerCase().includes("gerencial")
+                            ? "Repasar el procedimiento y los criterios de gestión relacionados con esta pregunta."
+                            : "Reforzar la explicación y la práctica del procedimiento relacionado con esta pregunta.";
+
+                        return `
+                            <tr>
+                                <td>${escaparHTML(item.categoria)}</td>
+                                <td>${escaparHTML(item.pregunta)}</td>
+                                <td><strong>${item.errores}</strong></td>
+                                <td>${recomendacion}</td>
+                            </tr>
+                        `;
+                    }).join("")}
+                </tbody>
+            </table>
+        `;
+
+    }
+
+    document.getElementById("conocimientosReforzar").innerHTML = htmlReforzar;
+
+}
+
+
+
+/* =========================================
+   HISTORIAL
+========================================= */
+
+function mostrarHistorial() {
+
+
+    document.getElementById("inicio")
+        .classList.add("hidden");
+
+
+    document.getElementById("resultado")
+        .classList.add("hidden");
+
+
+    document.getElementById("evaluacion")
+        .classList.add("hidden");
+
+
+    document.getElementById("dashboard")
+        .classList.add("hidden");
+
+
+    document.getElementById("historial")
+        .classList.remove("hidden");
+
+
+    document.getElementById(
+        "historialContenido"
+    )
+        .innerHTML =
+        '<div class="loading">Cargando historial...</div>';
+
+
+    const script =
+        document.createElement("script");
+
+
+    script.src =
+        URL_SCRIPT +
+        "?accion=historial&callback=callbackHistorial";
+
+
+    document.body.appendChild(script);
+
+}
+
+
+
+/* =========================================
+   CALLBACK HISTORIAL
+========================================= */
+
+function callbackHistorial(data) {
+
+
+    if (!data.success) {
+
+
+        document.getElementById(
+            "historialContenido"
+        )
+            .innerHTML =
+            "<div class='empty'>" +
+            "No se pudo cargar el historial." +
+            "</div>";
+
+
+        return;
+
+    }
+
+
+    const evaluaciones =
+        data.evaluaciones || [];
+
+
+    if (
+        evaluaciones.length === 0
+    ) {
+
+
+        document.getElementById(
+            "historialContenido"
+        )
+            .innerHTML =
+            "<div class='empty'>" +
+            "Todavía no hay evaluaciones registradas." +
+            "</div>";
+
+
+        return;
+
+    }
+
+
+    let html = `
+
+        <div style="overflow-x:auto;">
+
+        <table class="history-table">
+
+        <thead>
+
+        <tr>
+
+            <th>Fecha</th>
+
+            <th>Asociado</th>
+
+            <th>Local</th>
+
+            <th>Puesto</th>
+
+            <th>Categoría</th>
+
+            <th>Preguntas</th>
+
+            <th>Correctas</th>
+
+            <th>Incorrectas</th>
+
+            <th>Puntaje</th>
+
+            <th>Nivel</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+    `;
+
+
+    evaluaciones.forEach(e => {
+
+
+        /*
+           Ignoramos encabezados o filas
+           que no corresponden a evaluaciones.
+        */
+
+        if (
+            !esEvaluacionValida(e)
+        ) {
+
+            return;
+
+        }
+
+
+        /* FORMATO DE FECHA */
+
+        let fecha =
+            e.fecha || "";
+
+
+        if (
+            String(fecha).includes("T")
+        ) {
+
+
+            const fechaObj =
+                new Date(fecha);
+
+
+            if (
+                !isNaN(fechaObj)
+            ) {
+
+
+                fecha =
+
+                    String(
+                        fechaObj.getDate()
+                    )
+                    .padStart(2, "0")
+
+                    +
+
+                    "/" +
+
+                    String(
+                        fechaObj.getMonth() + 1
+                    )
+                    .padStart(2, "0")
+
+                    +
+
+                    "/" +
+
+                    fechaObj.getFullYear();
+
+            }
+
+        }
+
+
+
+        /* FORMATO DE PUNTAJE */
+
+        let puntaje =
+            convertirPuntaje(
+                e.puntaje
+            );
+
+
+        if (
+            !isNaN(puntaje)
+        ) {
+
+            puntaje =
+                Math.round(
+                    puntaje
+                ) + "%";
+
+        }
+
+        else {
+
+            puntaje = "—";
+
+        }
+
+
+
+        html += `
+
+            <tr>
+
+                <td>
+                    ${fecha}
+                </td>
+
+                <td>
+                    ${e.asociado}
+                </td>
+
+                <td>
+                    ${e.local}
+                </td>
+
+                <td>
+                    ${e.puesto}
+                </td>
+
+                <td>
+                    ${e.categoria || "-"}
+                </td>
+
+                <td>
+                    ${e.cantidad}
+                </td>
+
+                <td>
+                    ${e.correctas}
+                </td>
+
+                <td>
+                    ${e.incorrectas}
+                </td>
+
+                <td>
+
+                    <strong>
+                        ${puntaje}
+                    </strong>
+
+                </td>
+
+                <td>
+                    ${e.nivel}
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+
+    html += `
+
+        </tbody>
+
+        </table>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "historialContenido"
+    )
+        .innerHTML =
+        html;
+
+}
+
+
+
+/* =========================================
+   VOLVER DESDE HISTORIAL
+========================================= */
+
+function volverInicio() {
+
+
+    document.getElementById("historial")
+        .classList.add("hidden");
+
+
+    document.getElementById("inicio")
+        .classList.remove("hidden");
+
+}
+
+
+
+/* =========================================
+   VOLVER DESDE DASHBOARD
+========================================= */
+
+function volverInicioDashboard() {
+
+
+    document.getElementById("dashboard")
+        .classList.add("hidden");
+
+
+    document.getElementById("inicio")
+        .classList.remove("hidden");
+
+}
+
+
+
+/* =========================================
+   RESUMEN INDIVIDUAL DEL ASOCIADO
+========================================= */
+let registrosResumenAsociado = [];
+let resumenAsociadoCargado = false;
+
+function escaparResumen(valor) {
+    return String(valor == null ? "" : valor).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+function normalizarNombre(valor) {
+    return String(valor || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase().trim().replace(/\s+/g," ");
+}
+function mostrarResumenAsociado() {
+    ["inicio","evaluacion","resultado","dashboard","historial"].forEach(id => document.getElementById(id).classList.add("hidden"));
+    document.getElementById("resumenAsociado").classList.remove("hidden");
+    if (!resumenAsociadoCargado) {
+        document.getElementById("contenidoResumenAsociado").innerHTML = '<div class="loading">Cargando evaluaciones...</div>';
+        const script = document.createElement("script");
+        script.src = URL_SCRIPT + "?accion=historial&callback=callbackResumenAsociado";
+        script.onerror = () => { document.getElementById("contenidoResumenAsociado").innerHTML = '<div class="empty">No se pudo conectar con el historial. Intentá nuevamente.</div>'; };
+        document.body.appendChild(script);
+    } else buscarResumenAsociado();
+    document.getElementById("busquedaAsociado").focus();
+}
+function callbackResumenAsociado(data) {
+    if (!data || !data.success) {
+        document.getElementById("contenidoResumenAsociado").innerHTML = '<div class="empty">No se pudo cargar el historial.</div>';
+        return;
+    }
+    registrosResumenAsociado = (data.evaluaciones || []).filter(esEvaluacionValida);
+    resumenAsociadoCargado = true;
+    buscarResumenAsociado();
+}
+function fechaResumen(valor) {
+    if (!valor) return "—";
+    const texto = String(valor);
+    if (!texto.includes("T")) return escaparResumen(texto);
+    const fecha = new Date(texto);
+    return isNaN(fecha) ? escaparResumen(texto) : fecha.toLocaleDateString("es-PY");
+}
+function buscarResumenAsociado() {
+    const nombre = normalizarNombre(document.getElementById("busquedaAsociado").value);
+    const destino = document.getElementById("contenidoResumenAsociado");
+    if (!nombre) { destino.innerHTML = '<div class="empty">Escribí un nombre para consultar sus evaluaciones.</div>'; return; }
+    const coincidencias = registrosResumenAsociado.filter(e => normalizarNombre(e.asociado).includes(nombre));
+    if (!coincidencias.length) { destino.innerHTML = '<div class="empty">No encontramos evaluaciones para ese nombre.</div>'; return; }
+    const nombres = [...new Set(coincidencias.map(e => String(e.asociado).trim()))];
+    if (new Set(coincidencias.map(e => normalizarNombre(e.asociado))).size > 1) {
+        destino.innerHTML = '<p>Seleccioná un asociado:</p>' + nombres.map(n => '<button class="btn-secondary" style="margin:5px" onclick="seleccionarAsociadoResumen(decodeURIComponent(\''+encodeURIComponent(n)+'\'))">'+escaparResumen(n)+'</button>').join("");
+        return;
+    }
+    renderizarResumenAsociado(coincidencias);
+}
+function seleccionarAsociadoResumen(nombre) {
+    document.getElementById("busquedaAsociado").value = nombre;
+    buscarResumenAsociado();
+}
+function renderizarResumenAsociado(registros) {
+    const destino = document.getElementById("contenidoResumenAsociado");
+    const puntajes = registros.map(e => convertirPuntaje(e.puntaje)).filter(n => Number.isFinite(n));
+    const promedio = puntajes.length ? Math.round(puntajes.reduce((a,b) => a+b,0)/puntajes.length) + "%" : "—";
+    const satisfactorias = puntajes.filter(n => n >= 80).length;
+    const errores = new Map();
+    registros.forEach(e => {
+        const detalle = String(e.detalle || "");
+        detalle.split(/\s*\|\s*/).forEach(fragmento => {
+            const match = fragmento.match(/^\s*\d+\.\s*\[Incorrecta\]\s*(.*?)\s*$/i);
+            if (!match) return;
+            const texto = match[1].trim();
+            if (!texto) return;
+            const clave = normalizarNombre(texto);
+            const actual = errores.get(clave) || {texto, cantidad:0};
+            actual.cantidad++;
+            errores.set(clave,actual);
+        });
+    });
+    const ordenados = [...registros].sort((a,b) => {
+        const fa = Date.parse(a.fecha), fb = Date.parse(b.fecha);
+        return (Number.isFinite(fb)?fb:0)-(Number.isFinite(fa)?fa:0);
+    });
+    let html = '<h3 style="margin-top:10px">👤 '+escaparResumen(registros[0].asociado)+'</h3>';
+    html += '<div style="display:flex;flex-wrap:wrap;gap:12px;margin:18px 0">';
+    [['Evaluaciones',registros.length],['Promedio',promedio],['Satisfactorias (80% o más)',satisfactorias]].forEach(([titulo,valor]) => {
+        html += '<div style="flex:1;min-width:125px;padding:15px;background:#f7f7f7;border-radius:10px;text-align:center"><strong style="font-size:24px">'+valor+'</strong><div>'+titulo+'</div></div>';
+    });
+    html += '</div><h3>📋 Historial individual</h3><div style="overflow-x:auto"><table class="history-table"><thead><tr><th>Fecha</th><th>Local</th><th>Puesto</th><th>Categoría</th><th>Correctas</th><th>Incorrectas</th><th>Puntaje</th><th>Nivel</th></tr></thead><tbody>';
+    ordenados.forEach(e => { const p = convertirPuntaje(e.puntaje); html += '<tr>'+[fechaResumen(e.fecha),escaparResumen(e.local),escaparResumen(e.puesto),escaparResumen(e.categoria),escaparResumen(e.correctas),escaparResumen(e.incorrectas),Number.isFinite(p)?Math.round(p)+'%':'—',escaparResumen(e.nivel)].map(v => '<td>'+v+'</td>').join('')+'</tr>'; });
+    html += '</tbody></table></div><h3 style="margin-top:25px">🚨 Conocimientos a reforzar</h3>';
+    const lista = [...errores.values()].sort((a,b)=>b.cantidad-a.cantidad);
+    if (!lista.length) html += '<p>No hay respuestas incorrectas detalladas en los registros disponibles.</p>';
+    else { html += '<p>Priorizá el repaso de los procedimientos asociados a estas preguntas:</p><ol>'; lista.slice(0,10).forEach(item => {html += '<li style="margin-bottom:10px">'+escaparResumen(item.texto)+' <strong>('+item.cantidad+' '+(item.cantidad===1?'error':'errores')+')</strong></li>';}); html += '</ol>'; }
+    destino.innerHTML = html;
+}
+function volverDesdeResumen() {
+    document.getElementById("resumenAsociado").classList.add("hidden");
+    document.getElementById("inicio").classList.remove("hidden");
+}
+
+/* =========================================
+   INICIAR
+========================================= */
+
+cargarPreguntas();
+
+
 </script>
+
 </body>
+
 </html>
