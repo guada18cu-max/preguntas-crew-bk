@@ -830,16 +830,64 @@ button:hover {
         </div>
 
 
+<div class="form-group">
+<label for="fechaIngreso">Fecha de ingreso del asociado</label>
+<input type="date" id="fechaIngreso" required>
+</div>
+
         <div class="form-group">
 
             <label>
                 Local
             </label>
 
-            <input
-                type="text"
-                id="local"
-                placeholder="Ej.: Nombre del local">
+            <select id="local" required>
+<option value="">Seleccione un local</option>
+<option value="Bk Shop. del sol">Bk Shop. del sol</option>
+<option value="Bk Mall">Bk Mall</option>
+<option value="Bk España">Bk España</option>
+<option value="Bk Mariscal">Bk Mariscal</option>
+<option value="Bk Area 1">Bk Area 1</option>
+<option value="Bk Palma">Bk Palma</option>
+<option value="Bk PJC">Bk PJC</option>
+<option value="Bk CIT">Bk CIT</option>
+<option value="Bk Saltos">Bk Saltos</option>
+<option value="Bk Encarnacion">Bk Encarnacion</option>
+<option value="Bk Centro">Bk Centro</option>
+<option value="Bk Carmelitas">Bk Carmelitas</option>
+<option value="Bk Caacupe">Bk Caacupe</option>
+<option value="Bk Oviedo">Bk Oviedo</option>
+<option value="Bk San Lorenzo">Bk San Lorenzo</option>
+<option value="Bk Sanber">Bk Sanber</option>
+<option value="Bk Mburucuya">Bk Mburucuya</option>
+<option value="Bk Sajonia">Bk Sajonia</option>
+<option value="Bk Galeria">Bk Galeria</option>
+<option value="Bk La Fuente">Bk La Fuente</option>
+<option value="Bk Lambare">Bk Lambare</option>
+<option value="Bk Paris">Bk Paris</option>
+<option value="Bk Multiplaza">Bk Multiplaza</option>
+<option value="Bk Parque 14,5">Bk Parque 14,5</option>
+<option value="Bk Ñemby">Bk Ñemby</option>
+<option value="Bk Villa Rica">Bk Villa Rica</option>
+<option value="Bk 3 de Febrero">Bk 3 de Febrero</option>
+<option value="Bk Itaugua">Bk Itaugua</option>
+<option value="Bk Villa Elisa">Bk Villa Elisa</option>
+<option value="Bk Camba Cua">Bk Camba Cua</option>
+<option value="Bk Pinedo">Bk Pinedo</option>
+<option value="Bk Felix Bogado">Bk Felix Bogado</option>
+<option value="Bk Sanber Drive">Bk Sanber Drive</option>
+<option value="Bk Luque">Bk Luque</option>
+<option value="Bk Lagos">Bk Lagos</option>
+<option value="Bk Avda. Fdo.">Bk Avda. Fdo.</option>
+<option value="Bk Shop. Mariscal">Bk Shop. Mariscal</option>
+<option value="Bk Mariano Drive">Bk Mariano Drive</option>
+<option value="Bk Capiata R1">Bk Capiata R1</option>
+<option value="Bk Capiata R2">Bk Capiata R2</option>
+<option value="Bk Shopping China">Bk Shopping China</option>
+<option value="Bk Shop. Mariano">Bk Shop. Mariano</option>
+<option value="Bk Fdo. Zona Sur">Bk Fdo. Zona Sur</option>
+<option value="Bk Concepcion">Bk Concepcion</option>
+</select>
 
         </div>
 
@@ -1566,6 +1614,8 @@ function esEvaluacionValida(e) {
         .toLowerCase();
 
 
+    const fechaIngreso = document.getElementById("fechaIngreso").value;
+
     const local =
         String(
             e.local || ""
@@ -1770,6 +1820,7 @@ function iniciarEvaluacion() {
 
     if (
         !asociado ||
+        !fechaIngreso ||
         !local ||
         !puesto ||
         !evaluador ||
@@ -1831,6 +1882,7 @@ function iniciarEvaluacion() {
     datosEvaluacion = {
 
         asociado,
+        fechaIngreso,
         local,
         puesto,
         evaluador,
@@ -2280,6 +2332,9 @@ function guardarEvaluacion(
 
         asociado:
             datosEvaluacion.asociado,
+
+        fechaIngreso:
+            datosEvaluacion.fechaIngreso,
 
 
         local:
@@ -3613,8 +3668,10 @@ function renderizarResumenAsociado(registros) {
     [['Evaluaciones',registros.length],['Promedio',promedio],['Satisfactorias (80% o más)',satisfactorias]].forEach(([titulo,valor]) => {
         html += '<div style="flex:1;min-width:125px;padding:15px;background:#f7f7f7;border-radius:10px;text-align:center"><strong style="font-size:24px">'+valor+'</strong><div>'+titulo+'</div></div>';
     });
-    html += '</div><h3>📋 Historial individual</h3><div style="overflow-x:auto"><table class="history-table"><thead><tr><th>Fecha</th><th>Local</th><th>Puesto</th><th>Categoría</th><th>Correctas</th><th>Incorrectas</th><th>Puntaje</th><th>Nivel</th></tr></thead><tbody>';
-    ordenados.forEach(e => { const p = convertirPuntaje(e.puntaje); html += '<tr>'+[fechaResumen(e.fecha),escaparResumen(e.local),escaparResumen(e.puesto),escaparResumen(e.categoria),escaparResumen(e.correctas),escaparResumen(e.incorrectas),Number.isFinite(p)?Math.round(p)+'%':'—',escaparResumen(e.nivel)].map(v => '<td>'+v+'</td>').join('')+'</tr>'; });
+    const ingresos = registros.map(e => String(e.fechaIngreso || '').trim()).filter(Boolean);
+    html += '<p><strong>Fecha de ingreso:</strong> '+(ingresos.length ? fechaResumen(ingresos[0]) : 'No registrada')+'</p>';
+    html += '<h3>📋 Historial individual</h3><div style="overflow-x:auto"><table class="history-table"><thead><tr><th>Fecha</th><th>Fecha de ingreso</th><th>Local</th><th>Puesto</th><th>Categoría</th><th>Correctas</th><th>Incorrectas</th><th>Puntaje</th><th>Nivel</th></tr></thead><tbody>';
+    ordenados.forEach(e => { const p = convertirPuntaje(e.puntaje); html += '<tr>'+[fechaResumen(e.fecha),fechaResumen(e.fechaIngreso),escaparResumen(e.local),escaparResumen(e.puesto),escaparResumen(e.categoria),escaparResumen(e.correctas),escaparResumen(e.incorrectas),Number.isFinite(p)?Math.round(p)+'%':'—',escaparResumen(e.nivel)].map(v => '<td>'+v+'</td>').join('')+'</tr>'; });
     html += '</tbody></table></div><h3 style="margin-top:25px">🚨 Conocimientos a reforzar</h3>';
     const lista = [...errores.values()].sort((a,b)=>b.cantidad-a.cantidad);
     if (!lista.length) html += '<p>No hay respuestas incorrectas detalladas en los registros disponibles.</p>';
