@@ -3073,10 +3073,16 @@ function callbackDashboard(data, desdeFiltro = false) {
             ).trim();
 
 
-        if (!categoria) {
-
+        // El historial puede contener registros antiguos con columnas desplazadas.
+        // Solo contamos categorías existentes en el banco de preguntas.
+        const categoriasPermitidas = new Set(
+            preguntas.map(p => String(p.categoria || "").trim().toLocaleLowerCase()).filter(Boolean)
+        );
+        // Categorías principales de BK, también disponibles mientras carga el banco.
+        categoriasPermitidas.add("crew");
+        categoriasPermitidas.add("gerencial");
+        if (!categoria || !categoriasPermitidas.has(categoria.toLocaleLowerCase())) {
             return;
-
         }
 
 
