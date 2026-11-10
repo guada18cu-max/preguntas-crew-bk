@@ -1038,6 +1038,58 @@ button:hover {
     </p>
 
 
+<div class="dashboard-section" style="margin-top:0;margin-bottom:20px;">
+  <label for="filtroLocalDashboard">📍 Filtrar dashboard por local</label>
+  <select id="filtroLocalDashboard" onchange="aplicarFiltroLocalDashboard()" style="display:block;width:100%;margin-top:10px;">
+<option value="">Todos los locales</option>
+<option value="Bk Shop. del sol">Bk Shop. del sol</option>
+<option value="Bk Mall">Bk Mall</option>
+<option value="Bk España">Bk España</option>
+<option value="Bk Mariscal">Bk Mariscal</option>
+<option value="Bk Area 1">Bk Area 1</option>
+<option value="Bk Palma">Bk Palma</option>
+<option value="Bk PJC">Bk PJC</option>
+<option value="Bk CIT">Bk CIT</option>
+<option value="Bk Saltos">Bk Saltos</option>
+<option value="Bk Encarnacion">Bk Encarnacion</option>
+<option value="Bk Centro">Bk Centro</option>
+<option value="Bk Carmelitas">Bk Carmelitas</option>
+<option value="Bk Caacupe">Bk Caacupe</option>
+<option value="Bk Oviedo">Bk Oviedo</option>
+<option value="Bk San Lorenzo">Bk San Lorenzo</option>
+<option value="Bk Sanber">Bk Sanber</option>
+<option value="Bk Mburucuya">Bk Mburucuya</option>
+<option value="Bk Sajonia">Bk Sajonia</option>
+<option value="Bk Galeria">Bk Galeria</option>
+<option value="Bk La Fuente">Bk La Fuente</option>
+<option value="Bk Lambare">Bk Lambare</option>
+<option value="Bk Paris">Bk Paris</option>
+<option value="Bk Multiplaza">Bk Multiplaza</option>
+<option value="Bk Parque 14,5">Bk Parque 14,5</option>
+<option value="Bk Ñemby">Bk Ñemby</option>
+<option value="Bk Villa Rica">Bk Villa Rica</option>
+<option value="Bk 3 de Febrero">Bk 3 de Febrero</option>
+<option value="Bk Itaugua">Bk Itaugua</option>
+<option value="Bk Villa Elisa">Bk Villa Elisa</option>
+<option value="Bk Camba Cua">Bk Camba Cua</option>
+<option value="Bk Pinedo">Bk Pinedo</option>
+<option value="Bk Felix Bogado">Bk Felix Bogado</option>
+<option value="Bk Sanber Drive">Bk Sanber Drive</option>
+<option value="Bk Luque">Bk Luque</option>
+<option value="Bk Lagos">Bk Lagos</option>
+<option value="Bk Avda. Fdo.">Bk Avda. Fdo.</option>
+<option value="Bk Shop. Mariscal">Bk Shop. Mariscal</option>
+<option value="Bk Mariano Drive">Bk Mariano Drive</option>
+<option value="Bk Capiata R1">Bk Capiata R1</option>
+<option value="Bk Capiata R2">Bk Capiata R2</option>
+<option value="Bk Shopping China">Bk Shopping China</option>
+<option value="Bk Shop. Mariano">Bk Shop. Mariano</option>
+<option value="Bk Fdo. Zona Sur">Bk Fdo. Zona Sur</option>
+<option value="Bk Concepcion">Bk Concepcion</option>
+</select>
+  <p style="color:#777;font-size:13px;margin-bottom:0;">Elegí un local para consultar únicamente sus evaluaciones, asociados y conocimientos a reforzar.</p>
+</div>
+
     <!-- RESUMEN GENERAL -->
 
     <div class="dashboard-grid">
@@ -1149,6 +1201,11 @@ button:hover {
 
     </div>
 
+
+    <div class="dashboard-section">
+      <h3>👥 Resumen de asociados del local</h3>
+      <div id="resumenAsociadosLocal"><div class="empty">Los resultados aparecerán aquí.</div></div>
+    </div>
 
     <!-- RESULTADOS POR CATEGORÍA -->
 
@@ -1614,8 +1671,6 @@ function esEvaluacionValida(e) {
         .toLowerCase();
 
 
-    const fechaIngreso = document.getElementById("fechaIngreso").value;
-
     const local =
         String(
             e.local || ""
@@ -1790,6 +1845,8 @@ function iniciarEvaluacion() {
         document.getElementById("asociado")
         .value.trim();
 
+
+    const fechaIngreso = document.getElementById("fechaIngreso").value;
 
     const local =
         document.getElementById("local")
@@ -2553,7 +2610,18 @@ function mostrarDashboard() {
    CALLBACK DASHBOARD
 ========================================= */
 
-function callbackDashboard(data) {
+let registrosDashboardCompletos = [];
+function aplicarFiltroLocalDashboard() {
+    renderizarDashboardFiltrado();
+}
+function renderizarDashboardFiltrado() {
+    const selector = document.getElementById("filtroLocalDashboard");
+    const elegido = selector ? selector.value : "";
+    const filtradas = elegido ? registrosDashboardCompletos.filter(e => normalizarNombre(e.local) === normalizarNombre(elegido)) : registrosDashboardCompletos;
+    callbackDashboard({success:true,evaluaciones:filtradas}, true);
+}
+
+function callbackDashboard(data, desdeFiltro = false) {
 
 
     if (!data.success) {
@@ -2601,6 +2669,51 @@ function callbackDashboard(data) {
         (data.evaluaciones || [])
             .filter(esEvaluacionValida);
 
+
+    if (!desdeFiltro) {
+        registrosDashboardCompletos = evaluaciones;
+        const selector = document.getElementById("filtroLocalDashboard");
+        const elegido = selector.value;
+        // Los nombres del selector son los mismos usados al registrar las evaluaciones.
+        // También agregamos nombres históricos que no figuren en el desplegable.
+        const existentes = new Set(Array.from(selector.options).map(o => normalizarNombre(o.value)));
+        [...new Set(evaluaciones.map(e => String(e.local || "").trim()).filter(Boolean))]
+          .sort((a,b) => a.localeCompare(b,"es"))
+          .forEach(local => {
+            if (!existentes.has(normalizarNombre(local))) {
+              const option = document.createElement("option");
+              option.value = local;
+              option.textContent = local + " (histórico)";
+              selector.appendChild(option);
+              existentes.add(normalizarNombre(local));
+            }
+          });
+        selector.value = elegido;
+        if (elegido) { renderizarDashboardFiltrado(); return; }
+    }
+
+    const resumenPorAsociado = new Map();
+    evaluaciones.forEach(e => {
+        const nombre = String(e.asociado || "").trim();
+        const clave = normalizarNombre(nombre);
+        if (!clave) return;
+        if (!resumenPorAsociado.has(clave)) resumenPorAsociado.set(clave,{nombre,registros:0,puntajes:[],satisfactorias:0});
+        const fila = resumenPorAsociado.get(clave);
+        fila.registros++;
+        const puntaje = convertirPuntaje(e.puntaje);
+        if (Number.isFinite(puntaje)) {
+            fila.puntajes.push(puntaje);
+            if (puntaje >= 80) fila.satisfactorias++;
+        }
+    });
+    const destinoAsociados = document.getElementById("resumenAsociadosLocal");
+    if (!resumenPorAsociado.size) {
+        destinoAsociados.innerHTML = '<div class="empty">No hay evaluaciones registradas para el local seleccionado.</div>';
+    } else {
+        const filas = [...resumenPorAsociado.values()].sort((a,b)=>a.nombre.localeCompare(b.nombre,"es"));
+        destinoAsociados.innerHTML = '<div style="overflow-x:auto"><table class="history-table"><thead><tr><th>Asociado</th><th>Evaluaciones</th><th>Promedio</th><th>Satisfactorias (80% o más)</th></tr></thead><tbody>' +
+          filas.map(a => '<tr><td>'+escaparResumen(a.nombre)+'</td><td>'+a.registros+'</td><td>'+(a.puntajes.length?Math.round(a.puntajes.reduce((x,y)=>x+y,0)/a.puntajes.length)+'%':'—')+'</td><td>'+a.satisfactorias+'</td></tr>').join('') + '</tbody></table></div>';
+    }
 
     /* ================================
        TOTAL DE EVALUACIONES
